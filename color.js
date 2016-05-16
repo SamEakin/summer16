@@ -1,14 +1,24 @@
 // create DIV element
-var div = document.createElement('DIV');
-// set height of element
-div.style.height = '100vh';
-// add to DOM
-document.body.appendChild(div);
-// add event listener
-div.addEventListener('mousemove', function(event) {
-	console.log(event);
-	var x = event.clientX;
-	var y = event.clientY;
-	div.textContent = x + ', ' + y;
-	div.style.backgroundColor = 'rgb(' + x + ',' + y + ', 100)';
-});
+function fullScreen(element){
+	var newElement = document.createElement('DIV');
+	newElement.style.height = '100vh';
+	document.body.appendChild(newElement);
+	return newElement;
+}
+
+function input(inputType, DOMElement, callback){
+	DOMElement.addEventListener(inputType, function(event) {
+		var x = event.clientX;
+		var y = event.clientY;
+		callback(DOMElement,x,y);
+	});
+}
+
+function output(element, x, y){
+	element.textContent = x + ', ' + y;
+	element.style.backgroundColor = 'rgb(' + x + ',' + y + ', 100)';
+}
+
+input('mousemove', fullscreen('DIV'), output);
+
+
